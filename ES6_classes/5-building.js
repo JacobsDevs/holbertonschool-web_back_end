@@ -1,9 +1,10 @@
 export default class Building {
   constructor(sqft) {
-    if (this.constructor === Building) {
+    if (this.constructor == Building) {
       throw new Error("Abstract classes can't be instantiated");
+    } else {
+      this.sqft = sqft;
     }
-    this.sqft = sqft;
   }
 
   get sqft() {
