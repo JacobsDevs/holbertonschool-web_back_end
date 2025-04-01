@@ -28,7 +28,7 @@ export default class HolbertonCourse {
   }
 
   set students(students) {
-    if (students.isArray()) {
+    if (typeof students === 'object') {
       this._students = students;
     }
   }
