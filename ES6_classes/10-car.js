@@ -13,7 +13,7 @@ export default class Car {
     if (typeof value === 'string') {
       this._brand = value;
     } else {
-      throw new TypeError('Brand must be a string');
+      this._brand = undefined;
     }
   }
 
@@ -25,7 +25,7 @@ export default class Car {
     if (typeof value === 'string') {
       this._motor = value;
     } else {
-      throw new TypeError('Motor must be a string');
+      this._motor = undefined;
     }
   }
 
@@ -37,11 +37,11 @@ export default class Car {
     if (typeof value === 'string') {
       this._color = value;
     } else {
-      throw new TypeError('Color must be a string');
+      this._color = undefined;
     }
   }
 
   cloneCar() {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), {});
   }
 }
