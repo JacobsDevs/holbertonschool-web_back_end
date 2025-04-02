@@ -1,4 +1,4 @@
-function getListStudents() {
+export default function getListStudents() {
   return [
     {
       id: 1,
