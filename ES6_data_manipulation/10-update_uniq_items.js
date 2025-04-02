@@ -1,8 +1,12 @@
-export default function updateUniqueItems(input_map) {
-  input_map.forEach((ele, key) => {
-    if (ele === 1) {
-      input_map.set(key, 100);
-    }
-  });
-  return input_map;
+export default function updateUniqueItems(inputMap) {
+  if (inputMap instanceof Map) {
+    inputMap.forEach((ele, key) => {
+      if (ele === 1) {
+        inputMap.set(key, 100);
+      }
+    });
+  } else {
+    throw new TypeError('Cannot process');
+  }
+  return inputMap;
 }
