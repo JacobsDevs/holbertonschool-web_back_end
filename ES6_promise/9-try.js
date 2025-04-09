@@ -5,6 +5,8 @@ export default async function guardrail(mathFunction) {
       (value) => {
         queue.push(value);
       },
+    )
+    .catch(
       (reason) => {
         queue.push(reason.toString());
       },
