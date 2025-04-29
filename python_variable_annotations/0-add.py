@@ -1,4 +1,4 @@
-#!/usr/bin/puthon3
+#!/usr/bin/env python3
 
 """
 Add 2 floats and return a float.
