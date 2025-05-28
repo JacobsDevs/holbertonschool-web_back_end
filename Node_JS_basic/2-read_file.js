@@ -1,25 +1,28 @@
 const fs = require('node:fs');
-const { parse } = require('csv-parse');
 
 module.exports = function countStudents(path) {
-  try {
-    const cs = [];
-    const swe = [];
-    fs.createReadStream(path)
-      .pipe(parse({ delimiter: ',', from_line: 2 }))
-      .on('data', (row) => {
+  const cs = [];
+  const swe = [];
+  const stream = fs.createReadStream(path, 'utf8');
+  stream.on('data', (row) => {
+    const rows = row.split('\n');
+    for (const i in rows) {
+      if (i !== '0') {
+        const row = rows[i].split(',');
+        if (row.length === 1) {
+          console.log(`Number of students: ${cs.length + swe.length}`);
+          console.log(`Number of students is CS: ${cs.length}. List: ${cs.join(', ')}`);
+          console.log(`Number of students is SWE: ${swe.length}. List: ${swe.join(', ')}`);
+        }
         if (row[3] === 'CS') {
           cs.push(row[0]);
         } else {
           swe.push(row[0]);
         }
-      })
-      .on('end', () => {
-        console.log(`Number of students: ${cs.length + swe.length}`);
-        console.log(`Number of students is CS: ${cs.length}. List: ${cs.join(', ')}`);
-        console.log(`Number of students is SWE: ${swe.length}. List: ${swe.join(', ')}`);
-      });
-  } catch (err) {
+      }
+    }
+  });
+  stream.on('error', () => {
     throw new Error('Cannot load the database');
-  }
+  });
 };
